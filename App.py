@@ -27,19 +27,19 @@ mysql = MySQL(app)
 
 
 #SERVICIO 1
-#print(os.listdir("C:/Users/adan.carreto/Desktop/archivos/inbox"))
-for file in os.listdir("C:/Users/adan.carreto/Desktop/archivos/inbox"): 
+#print(os.listdir("C:/Users/darcy.espinosa/Desktop/archivos/inbox"))
+for file in os.listdir("C:/Users/darcy.espinosa/Desktop/inbox"): 
     if '.xlsx'in file:
-        print(file)
-    path = (r"C:/Users/adan.carreto/Desktop/archivos/inbox" + "/" + file)
+        print(file)        
+    path = (r"C:/Users/darcy.espinosa/Desktop/inbox" + "/" + file)
     #print(path)
     lectura = pd.read_excel(path)
     #print (("Hola",lectura))
 
-    path2 = "C:/Users/adan.carreto/Desktop/archivos/trash/"
-    file="C:/Users/adan.carreto/Desktop/archivos/inbox" + "/" + file
+    path2 = "C:/Users/darcy.espinosa/Desktop/trash/"
+    file="C:/Users/darcy.espinosa/Desktop/inbox" + "/" + file
 
-    path3 = "C:/Users/adan.carreto/Desktop/archivos/outbox/"
+    path3 = "C:/Users/darcy.espinosa/Desktop/outbox/"
     if lectura.empty: 
         #print ("Archivo vacio")
         shutil.move(file, path2)
@@ -54,9 +54,9 @@ engine = create_engine(db_data)
 
 with app.app_context():
     cur = mysql.connection.cursor()
-for file in os.listdir("C:/Users/adan.carreto/Desktop/archivos/outbox"):
+for file in os.listdir("C:/Users/darcy.espinosa/Desktop/outbox"):
     if '.xlsx'in file:
-        path4 = "C:/Users/adan.carreto/Desktop/archivos/outbox/" + file
+        path4 = "C:/Users/darcy.espinosa/Desktop/outbox/" + file
         df = pd.read_excel(path4)
         for item in df.iterrows():
             try:
@@ -70,6 +70,6 @@ for file in os.listdir("C:/Users/adan.carreto/Desktop/archivos/outbox"):
 data_xlsx = pd.read_sql_table(proper.schema, engine)
 
 ##print(data_xlsx)
-writer = ExcelWriter('C:/Users/adan.carreto/Desktop/archivos/temporales/dataset.xlsx')
+writer = ExcelWriter('C:/Users/darcy.espinosa/Desktop/temporales/dataset.xlsx')
 df.to_excel(writer, 'Hoja de datos', index=False)
 writer.save()
